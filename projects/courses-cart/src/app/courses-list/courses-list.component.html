@@ -1,0 +1,15 @@
+<div class="container">
+  <div>
+    <input type="text" placeholder="Search Courses ..." [(ngModel)]="searchText" #ctrl="ngModel" />
+  </div>
+  <div class="d-flex justify-content-between">
+    <div class="courses">
+      <div class="course" *ngFor="let course of coursesList | filter: searchText: 'title'">
+        <app-course [course]="course"></app-course>
+      </div>
+    </div>
+    <div class="w-25">
+      <app-cart [cart]="{items: [], sum: 0}" class="w-25 position-fixed"></app-cart>
+    </div>
+  </div>
+</div>
