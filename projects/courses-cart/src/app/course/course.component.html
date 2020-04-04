@@ -5,8 +5,8 @@
     <h6 class="card-subtitle mb-2 text-muted price">{{ course.price | currency:'EUR' }}</h6>
     <h6 class="card-subtitle mb-2 text-muted level">{{ course.level }}</h6>
     <div class="button-container">
-      <button type="button" class="btn btn-info mr-5px">+</button>
-      <button type="button" class="btn btn-info">-</button>
+      <button type="button" class="btn btn-info mr-5px" (click)="addToCart(course)">+</button>
+      <button type="button" class="btn btn-info" (click)="removeFromCart(course)">-</button>
     </div>
   </div>
 </div>

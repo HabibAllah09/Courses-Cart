@@ -1,4 +1,4 @@
-import { Course, CourseLevel } from './interfaces';
+import { Course, CourseLevel } from '../app/interfaces';
 
 export const courses: Course[] = [
   {

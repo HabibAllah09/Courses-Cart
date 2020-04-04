@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { courses } from '../data';
-import { Course, CartItem } from './../interfaces';
+import { courses } from './../../assets/data';
+import { Course } from './../interfaces';
 
 @Component({
   selector: 'app-courses-list',
