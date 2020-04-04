@@ -80,6 +80,10 @@ button:disabled {
   cursor: auto;
 }
 
+.round-button {
+  border-radius: 50%;
+}
+
 app-nav-bar {
   width: 100%;
   height: 68px;
