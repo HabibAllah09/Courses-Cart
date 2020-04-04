@@ -20,8 +20,18 @@ export class CartService {
     return this.cart;
   }
 
+  getCartItems(): CartItem[] {
+    return this.cart.items;
+  }
+
+  isItemExists(item: CartItem): boolean {
+    return (
+      this.cart.items.findIndex(anItem => item.title === anItem.title) >= 0
+    );
+  }
+
   removeFromCart(item: CartItem): void {
-    if (this.cart.items.findIndex(anItem => item.title === anItem.title) < 0) {
+    if (!this.isItemExists(item)) {
       return;
     }
     this.cart.sum -= item.price;

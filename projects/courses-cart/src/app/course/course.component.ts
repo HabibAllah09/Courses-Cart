@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Course } from './../interfaces';
+import { Course, CartItem } from './../interfaces';
 import { CartService } from '../cart.service';
 
 @Component({
@@ -14,11 +14,18 @@ export class CourseComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  addToCart(course: Course) {
+  addToCart(course: Course): void {
     this.cartService.addToCart(course);
   }
 
-  removeFromCart(course: Course) {
+  isButtonDisabled(buttonType: string): boolean {
+    if (buttonType === 'add') {
+      return this.cartService.isItemExists(this.course);
+    }
+    return !this.cartService.isItemExists(this.course);
+  }
+
+  removeFromCart(course: Course): void {
     this.cartService.removeFromCart(course);
   }
 }
