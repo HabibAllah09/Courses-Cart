@@ -3,7 +3,7 @@ import { StorageService } from './storage.service';
 import { Cart, CartItem } from './interfaces';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CartService {
   private cart: Cart = { items: [], sum: 0 };
@@ -22,11 +22,13 @@ export class CartService {
   }
 
   getCart(): Cart {
-    const cartFromStorage = JSON.parse(
-      this.storageService.getItemFromLocalStorage('cart') || ''
-    );
-    if (cartFromStorage) {
-      this.cart = cartFromStorage;
+    if (this.storageService.getItemFromLocalStorage('cart')) {
+      const cartFromStorage = JSON.parse(
+        this.storageService.getItemFromLocalStorage('cart') || ''
+      );
+      if (cartFromStorage) {
+        this.cart = cartFromStorage;
+      }
     }
     return this.cart;
   }
@@ -37,7 +39,7 @@ export class CartService {
 
   isItemExists(item: CartItem): boolean {
     return (
-      this.cart.items.findIndex(anItem => item.title === anItem.title) >= 0
+      this.cart.items.findIndex((anItem) => item.title === anItem.title) >= 0
     );
   }
 
@@ -47,7 +49,7 @@ export class CartService {
     }
     this.cart.sum -= item.price;
     this.cart.items = this.cart.items.filter(
-      anItem => item.title !== anItem.title
+      (anItem) => item.title !== anItem.title
     );
     this.storageService.saveCartToLocalStorage(
       'cart',

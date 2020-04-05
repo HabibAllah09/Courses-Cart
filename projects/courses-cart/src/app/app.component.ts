@@ -5,7 +5,7 @@ import { StorageService } from './storage.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
   title = 'courses-cart';
@@ -16,8 +16,13 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.cartService.updateCart(
-      JSON.parse(this.storageService.getItemFromLocalStorage('cart') || '')
-    );
+    if (this.storageService.getItemFromLocalStorage('cart')) {
+      this.cartService.updateCart(
+        JSON.parse(
+          this.storageService.getItemFromLocalStorage('cart') ||
+            '{items: [], sum: 0}'
+        )
+      );
+    }
   }
 }
