@@ -1,4 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
+import { StorageService } from './storage.service';
 import { Cart, CartItem } from './interfaces';
 
 @Injectable({
@@ -8,15 +9,25 @@ export class CartService {
   private cart: Cart = { items: [], sum: 0 };
   public cartUpdated: EventEmitter<any> = new EventEmitter();
 
-  constructor() {}
+  constructor(private storageService: StorageService) {}
 
   addToCart(item: CartItem): void {
     this.cart.sum += item.price;
     this.cart.items.push(item);
+    this.storageService.saveCartToLocalStorage(
+      'cart',
+      JSON.stringify(this.cart)
+    );
     this.cartUpdated.emit(this.cart);
   }
 
   getCart(): Cart {
+    const cartFromStorage = JSON.parse(
+      this.storageService.getItemFromLocalStorage('cart') || ''
+    );
+    if (cartFromStorage) {
+      this.cart = cartFromStorage;
+    }
     return this.cart;
   }
 
@@ -38,6 +49,15 @@ export class CartService {
     this.cart.items = this.cart.items.filter(
       anItem => item.title !== anItem.title
     );
+    this.storageService.saveCartToLocalStorage(
+      'cart',
+      JSON.stringify(this.cart)
+    );
+    this.cartUpdated.emit(this.cart);
+  }
+
+  updateCart(cartObj: Cart): void {
+    this.cart = cartObj;
     this.cartUpdated.emit(this.cart);
   }
 }

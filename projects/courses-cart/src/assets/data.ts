@@ -15,7 +15,7 @@ export const courses: Course[] = [
   },
   {
     description:
-      "Wanna learn more about Pattern Design, You're not in the right place",
+      "Wanna learn more about Design Pattern, You're not in the right place",
     level: CourseLevel.Advanced,
     price: 9,
     title: 'Pattern Design'

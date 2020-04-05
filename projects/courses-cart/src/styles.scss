@@ -19,6 +19,7 @@ input {
   padding: 8px;
   margin-bottom: 16px;
   border: 1px solid #bdbdbd;
+  width: 30%;
 }
 
 label {
@@ -36,6 +37,10 @@ label {
 
 .card-body {
   min-height: 200px;
+}
+
+.custom-select {
+  width: 30%;
 }
 
 .level {

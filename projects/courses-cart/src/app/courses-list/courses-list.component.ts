@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { courses } from './../../assets/data';
 import { Course } from './../interfaces';
 
@@ -9,9 +10,15 @@ import { Course } from './../interfaces';
 })
 export class CoursesListComponent implements OnInit {
   coursesList: Course[] = courses;
-  searchText: string = '';
+  sortProperties: string[] = ['level', 'price'];
+  filterSortForm: FormGroup;
 
-  constructor() {}
+  constructor(public fb: FormBuilder) {
+    this.filterSortForm = this.fb.group({
+      sortBy: new FormControl(''),
+      searchText: new FormControl('')
+    });
+  }
 
   ngOnInit(): void {}
 }
